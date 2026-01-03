@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tata Steel Virtual Assistant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1>🏭 Tata Steel VA</h1>
+                <p>Maintenance Assistant</p>
+            </div>
+            <div class="status" id="status">
+                <span class="status-dot"></span>
+                <span>Connected</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="section">
+                    <h3>Equipment Monitor</h3>
+                    <div id="equipment-list" class="equipment-list">
+                        <p class="loading">Loading equipment...</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>Quick Actions</h3>
+                    <button class="btn btn-secondary" onclick="loadSOPs()">
+                        📄 Manage SOPs
+                    </button>
+                    <button class="btn btn-secondary" onclick="showStats()">
+                        📊 View Statistics
+                    </button>
+                </div>
+
+                <div class="section">
+                    <h3>Settings</h3>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="includePlantData" checked>
+                        Include plant data in responses
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="enableVoice">
+                        Enable voice input
+                    </label>
+                </div>
+            </aside>
+
+            <!-- Chat Area -->
+            <main class="chat-container">
+                <div class="chat-header">
+                    <h2>Maintenance Chat</h2>
+                    <button class="btn btn-sm" onclick="clearChat()">Clear Chat</button>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot-message">
+                        <div class="message-content">
+                            <p>Hello! I'm your Tata Steel maintenance assistant. I can help you with:</p>
+                            <ul>
+                                <li>Equipment troubleshooting and fault diagnosis</li>
+                                <li>Standard Operating Procedures (SOPs)</li>
+                                <li>Maintenance scheduling and history</li>
+                                <li>Real-time equipment monitoring</li>
+                            </ul>
+                            <p>How can I assist you today?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-input-container">
+                    <div class="input-group">
+                        <textarea 
+                            id="messageInput" 
+                            placeholder="Ask about equipment, maintenance procedures, or SOPs..."
+                            rows="1"
+                        ></textarea>
+                        <button class="btn btn-icon" id="voiceBtn" onclick="toggleVoiceInput()" title="Voice input">
+                            🎤
+                        </button>
+                        <button class="btn btn-primary" onclick="sendMessage()">
+                            Send
+                        </button>
+                    </div>
+                    <div class="suggestions">
+                        <button class="suggestion-chip" onclick="fillMessage('How to fix a rolling mill fault?')">
+                            Rolling mill fault?
+                        </button>
+                        <button class="suggestion-chip" onclick="fillMessage('Show me equipment status')">
+                            Equipment status
+                        </button>
+                        <button class="suggestion-chip" onclick="fillMessage('What maintenance is due?')">
+                            Maintenance schedule
+                        </button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal for equipment details -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
